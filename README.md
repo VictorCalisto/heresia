@@ -1,0 +1,2 @@
+# heresia
+catalogo de heresias
