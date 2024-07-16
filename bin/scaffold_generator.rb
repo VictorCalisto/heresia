@@ -30,9 +30,9 @@ def format_attribute_name(attr_name)
 end
 
 # Método para validar o tipo do atributo
+attribute_type= %w[string text integer float decimal datetime timestamp time date binary boolean references]
 def valid_attribute_type?(attr_type)
-  valid_types = %w[string text integer float decimal datetime timestamp time date binary boolean]
-  valid_types.include?(attr_type)
+  attribute_type.include?(attr_type)
 end
 
 # Método para gerar o comando scaffold
@@ -54,14 +54,14 @@ loop do
   formatted_attr_name = format_attribute_name(attr_name)
 
   loop do
-    attr_type = get_input("Digite o tipo do atributo \n (ex: string text integer float decimal datetime timestamp time date binary boolean.)\n : ").gsub(/[^a-zA-Z]/, '').downcase
+    attr_type = get_input("Digite o tipo do atributo \n (ex: #{attribute_type.})\n : ").gsub(/[^a-zA-Z]/, '').downcase
     
     if valid_attribute_type?(attr_type)
       # Adiciona o atributo à lista
       attributes << { name: formatted_attr_name, type: attr_type }
       break
     else
-      puts "Tipo de atributo inválido. Tipos válidos: string, text, integer, float, decimal, datetime, timestamp, time, date, binary, boolean"
+      puts "Tipo de atributo inválido.\n Tipos válidos: #{attribute_type.})"
     end
   end
   
