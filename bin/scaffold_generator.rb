@@ -31,14 +31,16 @@ end
 
 # Método para validar o tipo do atributo
 attribute_type= %w[string text integer float decimal datetime timestamp time date binary boolean references]
+sim= %w[s si sim y ye yes yep]
 def valid_attribute_type?(attr_type)
   attribute_type.include?(attr_type)
 end
 
 # Método para gerar o comando scaffold
-def generate_scaffold(model_name, attributes)
+def generate_scaffold(model_name, attributes, options)
   attributes_string = attributes.map { |attr| "#{attr[:name]}:#{attr[:type]}" }.join(' ')
-  "rails generate scaffold #{model_name} #{attributes_string}"
+  options_string = options.map { |option| "--skip-#{option}" }.join(' ')
+  "rails generate scaffold #{model_name} #{attributes_string} #{options_string}"
 end
 
 # Pergunta o nome do modelo ao usuário
@@ -67,7 +69,18 @@ loop do
   
   # Pergunta se há mais atributos
   more_attributes = get_input("Deseja adicionar mais um atributo? (s/n): ")
-  break if %w[n na nao no not nop].include?(more_attributes.downcase)
+  break if !sim.include?(more_attributes.downcase)
+end
+
+# Pergunta se o usuário deseja pular alguma parte do scaffold
+options = []
+if !sim.include?(get_input("Deseja gerar o scaffold completo ? (s/n): "))
+  options << 'view' if !sim.include?(get_input("Deseja pular a view? (s/n): ").downcase)
+  options << 'controller' if !sim.include?(get_input("Deseja pular o controller? (s/n): ").downcase)
+  options << 'model' if !sim.include?(get_input("Deseja pular o model? (s/n): ").downcase)
+  options << 'migration' if !sim.include?(get_input("Deseja pular a migration? (s/n): ").downcase)
+  options << 'resource-route' if !sim.include?(get_input("Deseja pular a resource route? (s/n): ").downcase)
+  options << 'scaffold-stylesheet' if  !sim.include?(get_input("Deseja pular o scaffold stylesheet? (s/n): ").downcase)
 end
 
 # Gera o comando scaffold
