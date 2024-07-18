@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'active_support/inflector'
+require 'active_support/all'
 
 # Script para gerar um scaffold no Rails interativamente
 ATTRIBUTE_TYPE= %w[string text integer float decimal datetime timestamp time date binary boolean references]
