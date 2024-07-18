@@ -48,5 +48,5 @@ ActiveSupport::Inflector.inflections(:pt) do |inflect|
   # Regras irregulares
 
   # Palavras nao contaveis
-  inflect.uncountable %w(torax tenis lapis fenix onibus caris lupus pires climax parentesis triceps biceps duplex triplex)
+  inflect.uncountable %w(torax xadrez tenis lapis fenix onibus caris lupus pires climax parentesis triceps biceps duplex triplex)
 end

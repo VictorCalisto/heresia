@@ -41,10 +41,9 @@ RUN if [ -f package.json ]; then \
       npm init -y && npm install; \
     fi
 # Instala o Bundler
-RUN if [ -f Gemfile ]; then \
-      bundle install -j $(nproc) && \
-      rails assets:precompile; \
-    fi
+RUN gem install bundler -v 2.5.4 &&\
+    bundle install -j $(nproc)
+    
 # Limpar o cache do apt-get e outros arquivos temporários
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Tratamento de erros

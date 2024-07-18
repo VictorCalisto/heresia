@@ -10,27 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_17_013209) do
+ActiveRecord::Schema[7.1].define(version: 0) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "concilios", force: :cascade do |t|
-    t.string "nome"
-    t.integer "ano_inicio"
-    t.integer "ano_fim"
-    t.text "descricao"
-    t.bigint "heresia_condenada_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["heresia_condenada_id"], name: "index_concilios_on_heresia_condenada_id"
-  end
-
-  create_table "heresia", force: :cascade do |t|
-    t.string "nome"
-    t.text "descricao"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_foreign_key "concilios", "heresia", column: "heresia_condenada_id"
 end
