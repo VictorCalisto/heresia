@@ -36,10 +36,10 @@ def valid_attribute_type?(attr_type)
 end
 
 # Método para gerar o comando scaffold
-def generate_scaffold(model_name, attributes, options)
+def generate_scaffold(model_name, attributes, options = [])
   attributes_string = attributes.map { |attr| "#{attr[:name]}:#{attr[:type]}" }.join(' ')
-  options_string = options.map { |option| "--skip-#{option}" }.join(' ')
-  "rails generate scaffold #{model_name} #{attributes_string} #{options_string}"
+  options_string = options.any? ? options.map { |option| "--skip-#{option}" }.join(' ') : ''
+  "rails generate scaffold #{model_name} #{attributes_string} #{options_string}".strip
 end
 
 # Pergunta o nome do modelo ao usuário
