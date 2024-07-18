@@ -2,7 +2,8 @@
 require 'active_support/inflector'
 
 # Script para gerar um scaffold no Rails interativamente
-
+ATTRIBUTE_TYPE= %w[string text integer float decimal datetime timestamp time date binary boolean references]
+SIM= %w[s si sim y ye yes yep]
 # Método para obter entrada do usuário com uma mensagem
 def get_input(prompt)
   print prompt
@@ -30,10 +31,8 @@ def format_attribute_name(attr_name)
 end
 
 # Método para validar o tipo do atributo
-attribute_type= %w[string text integer float decimal datetime timestamp time date binary boolean references]
-sim= %w[s si sim y ye yes yep]
 def valid_attribute_type?(attr_type)
-  attribute_type.include?(attr_type)
+  ATTRIBUTE_TYPE.include?(attr_type)
 end
 
 # Método para gerar o comando scaffold
@@ -56,31 +55,31 @@ loop do
   formatted_attr_name = format_attribute_name(attr_name)
 
   loop do
-    attr_type = get_input("Digite o tipo do atributo \n (ex: #{attribute_type.})\n : ").gsub(/[^a-zA-Z]/, '').downcase
+    attr_type = get_input("Digite o tipo do atributo \n (ex: #{ATTRIBUTE_TYPE})\n : ").gsub(/[^a-zA-Z]/, '').downcase
     
     if valid_attribute_type?(attr_type)
       # Adiciona o atributo à lista
       attributes << { name: formatted_attr_name, type: attr_type }
       break
     else
-      puts "Tipo de atributo inválido.\n Tipos válidos: #{attribute_type.})"
+      puts "Tipo de atributo inválido.\n Tipos válidos: #{ATTRIBUTE_TYPE})"
     end
   end
   
   # Pergunta se há mais atributos
   more_attributes = get_input("Deseja adicionar mais um atributo? (s/n): ")
-  break if !sim.include?(more_attributes.downcase)
+  break if !SIM.include?(more_attributes.downcase)
 end
 
 # Pergunta se o usuário deseja pular alguma parte do scaffold
 options = []
-if !sim.include?(get_input("Deseja gerar o scaffold completo ? (s/n): "))
-  options << 'view' if !sim.include?(get_input("Deseja pular a view? (s/n): ").downcase)
-  options << 'controller' if !sim.include?(get_input("Deseja pular o controller? (s/n): ").downcase)
-  options << 'model' if !sim.include?(get_input("Deseja pular o model? (s/n): ").downcase)
-  options << 'migration' if !sim.include?(get_input("Deseja pular a migration? (s/n): ").downcase)
-  options << 'resource-route' if !sim.include?(get_input("Deseja pular a resource route? (s/n): ").downcase)
-  options << 'scaffold-stylesheet' if  !sim.include?(get_input("Deseja pular o scaffold stylesheet? (s/n): ").downcase)
+if !SIM.include?(get_input("Deseja gerar o scaffold completo ? (s/n): "))
+  options << 'view' if !SIM.include?(get_input("Deseja pular a view? (s/n): ").downcase)
+  options << 'controller' if !SIM.include?(get_input("Deseja pular o controller? (s/n): ").downcase)
+  options << 'model' if !SIM.include?(get_input("Deseja pular o model? (s/n): ").downcase)
+  options << 'migration' if !SIM.include?(get_input("Deseja pular a migration? (s/n): ").downcase)
+  options << 'resource-route' if !SIM.include?(get_input("Deseja pular a resource route? (s/n): ").downcase)
+  options << 'scaffold-stylesheet' if  !SIM.include?(get_input("Deseja pular o scaffold stylesheet? (s/n): ").downcase)
 end
 
 # Gera o comando scaffold
