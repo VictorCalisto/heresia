@@ -17,7 +17,7 @@ def format_model_name(model_name)
   # Capitaliza cada palavra e junta sem espaços
   model_name = model_name.split.map(&:capitalize).join
   # Garante que o nome esteja no singular
-  model_name = singularize(:pt)
+  model_name = model_name.singularize(:pt)
   model_name
 end
 
