@@ -46,6 +46,7 @@ ActiveSupport::Inflector.inflections(:pt) do |inflect|
   inflect.singular /xes$/i, 'x'         # toxes -> tox
 
   # Regras irregulares
+  inflect.irregular 'heresia', 'heresias'
 
   # Palavras nao contaveis
   inflect.uncountable %w(torax xadrez tenis lapis fenix onibus caris lupus pires climax parentesis triceps biceps duplex triplex)
