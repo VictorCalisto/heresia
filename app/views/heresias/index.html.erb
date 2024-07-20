@@ -11,11 +11,44 @@
   </div>
 
   <div id="heresias" class="min-w-full">
-    <% @heresias.each do |heresia| %>
-      <%= render heresia %>
-      <p>
-        <%= link_to "Show this heresia", heresia, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
+    <table class="min-w-full bg-white border border-gray-200">
+      <thead>
+        <tr>
+          <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <strong class="block font-medium mb-1">Nome:</strong>
+          </th>
+          <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <strong class="block font-medium mb-1">Descricao:</strong>
+          </th>
+          <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <strong class="block font-medium mb-1">Opições:</strong>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+       <% @heresias.each do |heresia| %>
+        <tr class="bg-gray-50" id="<%= dom_id heresia %>">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+            <p class="my-5">
+              <%= heresia.nome %>
+            </p>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <p class="my-5">
+              <%= heresia.descricao %>
+            </p>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <ul >
+              <li class= "ml-5 rounded-lg py-3 px-5  inline-block font-medium"><%= link_to "Show", heresia %></li>
+              <li class= "ml-5 rounded-lg py-3 px-5  inline-block font-medium"><%= link_to "Edit", edit_heresia_path(heresia.id) %></li>
+              <li class= "ml-5 rounded-lg py-3 px-5  inline-block font-medium"><%= button_to "Destroy", heresia, method: :delete %></li>
+            </ul>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
   </div>
 </div>
