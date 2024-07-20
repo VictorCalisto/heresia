@@ -1,0 +1,2 @@
+module HeresiasHelper
+end
