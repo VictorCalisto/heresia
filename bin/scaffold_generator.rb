@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 require 'active_support/all'
+load File.expand_path('/app/config/initializers/inflections.rb', __dir__)
 
 # Script para gerar um scaffold no Rails interativamente
 ATTRIBUTE_TYPE= %w[string text integer float decimal datetime timestamp time date binary boolean references]
 SIM= %w[s si sim y ye yes yep]
+
 # Método para obter entrada do usuário com uma mensagem
 def get_input(prompt)
   print prompt
@@ -17,7 +19,7 @@ def format_model_name(model_name)
   # Capitaliza cada palavra e junta sem espaços
   model_name = model_name.split.map(&:capitalize).join
   # Garante que o nome esteja no singular
-  model_name = model_name.singularize(:pt)
+  model_name = ActiveSupport::Inflector.singularize(model_name, :pt)
   model_name
 end
 
